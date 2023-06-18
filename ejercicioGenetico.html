@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function generarVector(){
+            var vec = new Array(10)
+            for(var i=0;i<vec.length;i++){
+                vec[i]=Math.floor(Math.random()*10)
+            }
+            return vec
+        }
+        function cadenaGenetica(vec1,vec2){
+            var corte = Math.floor(Math.random()*10)
+            var hijo1= new Array(9)
+            var hijo2= new Array(9)
+            var resultado= new Array(hijo1,hijo2)
+            for(var i=0;i<corte;i++){
+                hijo1[i]=vec1[i]
+                hijo2[i]=vec2[i]
+            }
+            for(var i=vec1.length-1;i>=corte;i--){
+                hijo2[i]=vec1[i]
+                hijo1[i]=vec2[i]
+            }
+            return resultado
+        }
+        function mezclaGenetica(vec){
+            if(Math.floor(Math.random()*100)<5){
+                vec[Math.floor(Math.random()*9)]=Math.floor(Math.random()*10)
+            }
+            return vec
+        }
+        function comparacionGenes(vec,modelo){
+            var resultado=0
+            for(var i=0;i<vec.length;i++){
+                resultado=resultado+Math.pow(vec[i]-modelo[i],2)
+            }
+            return Number(resultado)
+        }
+        function ordenarVectores(vecs,puntuaciones){
+            var aux
+            for(var i=1;i<vecs.length;i++){
+                for(var y=0;y<vecs.length;y++){
+                    if(puntuaciones[y]>puntuaciones[y+1]){
+                        aux=puntuaciones[y]
+                        puntuaciones[y]=puntuaciones[y+1]
+                        puntuaciones[y+1]=aux
+                        aux=vecs[y]
+                        vecs[y]=vecs[y+1]
+                        vecs[y+1]=aux
+                    }
+                }
+            }
+            return vecs
+        }
+        function ordenarPorcentaje(vecs,porcentaje){
+            var resultado = new Array()
+            for(var i=0;i<vecs.length*porcentaje/100;i++){
+                resultado.push(vecs[i])
+            }
+            return resultado
+        }
+        var vecs = new Array()
+        var puntuaciones = new Array()
+        var vec1=generarVector()
+        var vec2=generarVector()
+        var vecsPuntuacion=new Array()
+        var modelo = new Array(0,1,2,3,4,5,6,7,8,9)
+        var hijos=new Array(2)
+        for(var i=0;i<10;i++){ //los 10 padres
+            vecs.push(generarVector())
+        }
+        for(var x=0;x<100;x++){
+            vecsPuntuacion=new Array(100)
+            for(var i=0;i<10;i=i+2){ //18 hijos creados por par
+                for(var y=0;y<9;y++){
+                    hijos=cadenaGenetica(vecs[i],vecs[i+1])
+                    mezclaGenetica(hijos[0])
+                    mezclaGenetica(hijos[1])
+                    vecs.push(hijos[0])
+                    vecs.push(hijos[1])
+                }
+            }
+            for(var i=0;i<vecs.length;i++){ //puntuando especimenes
+                vecsPuntuacion[i]=comparacionGenes(vecs[i],modelo)
+            }
+            for(var i=0;i<vecs.length;i++){
+                //document.write(vecs[i]+"    "+vecsPuntuacion[i]+"</br>")
+            }
+            ordenarVectores(vecs,vecsPuntuacion) //ordenacion
+            vecs=ordenarPorcentaje(vecs,10) //sustitucion
+            document.write("</br><strong>"+(x+1)+"ª generación </strong></br>")
+            for(var i=0;i<vecs.length;i++){
+                document.write(vecs[i]+"</br>")
+            }
+        }
+        
+
+        
+    </script>
+</body>
+</html>
