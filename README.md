@@ -1,10 +1,15 @@
-# ejercicioGenetico
-Ejercicio de vectores y genética.  
-## Crea el ciclo de vida del programa:
--Generación aleatoria de 10 padres.  
--Por cada pareja de padres, se crean 18 hijos, con los genes mezclados y mutados.  
--Junta padres e hijos, para tener un total de 100 especímenes.   
--Puntúa los 100 especímenes y ordénalos.  
--Quedate con el 10% mejor, para tener así 10 padres de nuevo.  
--Repite el proceso 100 veces (100 generaciones)  
--En cada iteración, imprime el vector de genes que más puntuación lleva
+# Ejercicio de algoritmo genético
+
+Práctica realizada durante el primer curso del ciclo de Desarrollo de Aplicaciones Web (DAW), mientras aprendía JavaScript y conceptos básicos de algoritmia.
+
+El programa intenta aproximar un vector de diez números a un vector objetivo mediante un algoritmo genético sencillo. En cada generación crea descendientes a partir de la población actual, introduce mutaciones aleatorias, calcula el error cuadrático y conserva los diez mejores individuos.
+
+## Ejecución
+
+Abre `ejercicioGenetico.html` en el navegador y pulsa **Ejecutar 100 generaciones**. Se muestran la mejor puntuación y los genes obtenidos en cada generación. El proceso termina antes si encuentra una solución con error cero.
+
+## Conceptos practicados
+
+Arrays, funciones, generación aleatoria, cruces, mutaciones, evaluación y selección de individuos.
+
+El ejercicio se ha revisado posteriormente para corregir el tamaño de los vectores, los índices de mutación y la ordenación de las puntuaciones. No utiliza bibliotecas externas ni pretende ser una implementación avanzada de optimización.
